@@ -1,0 +1,19 @@
+description = input("Enter the threat intelligence report description: ").lower()
+audience = input("Enter the intended audience: ").lower()
+
+strategic_keywords = ["business impact", "long-term", "risk trends", "executives", "management", "senior leadership", "business strategy"]
+tactical_keywords = ["tactics", "techniques", "procedures", "mitre att&ck", "security teams", "threat actors", "attack methods"]
+operational_keywords = ["ip address", "domain", "hash", "malware sample", "incident response", "soc analyst", "indicators of compromise", "ioc"]
+
+strategic_score = sum(word in description or word in audience for word in strategic_keywords)
+tactical_score = sum(word in description or word in audience for word in tactical_keywords)
+operational_score = sum(word in description or word in audience for word in operational_keywords)
+
+if strategic_score > tactical_score and strategic_score > operational_score:
+    print("Classification: Strategic Threat Intelligence")
+elif tactical_score > strategic_score and tactical_score > operational_score:
+    print("Classification: Tactical Threat Intelligence")
+elif operational_score > strategic_score and operational_score > tactical_score:
+    print("Classification: Operational Threat Intelligence")
+else:
+    print("Classification: Unclear or Mixed Threat Intelligence")
