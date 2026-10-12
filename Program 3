@@ -1,0 +1,22 @@
+document = input("Enter the draft security policy document: ").lower()
+
+elements = {
+    "Scope": ["scope", "purpose", "applicability"],
+    "Roles and Responsibilities": ["roles", "responsibilities"],
+    "Enforcement": ["enforcement", "violations", "disciplinary action"],
+    "Review Cycle": ["review cycle", "annual review", "periodic review"],
+    "Approval Authority": ["approval authority", "approved by", "authorised by", "authorized by"]
+}
+
+missing = []
+
+for element, keywords in elements.items():
+    if not any(keyword in document for keyword in keywords):
+        missing.append(element)
+
+if missing:
+    print("Missing Governance Elements:")
+    for element in missing:
+        print(element)
+else:
+    print("All required governance elements are present.")
