@@ -1,0 +1,23 @@
+def encrypt(data, key):
+    return bytes([data[i] ^ key[i % len(key)] for i in range(len(data))])
+
+message = input("Enter the data to send: ").encode()
+key = input("Enter the shared key: ").encode()
+
+if not key:
+    print("Key cannot be empty.")
+else:
+    encrypted_data = encrypt(message, key)
+
+    print("Original Data:", message.decode())
+    print("Encrypted Data Captured in Transit:", encrypted_data.hex())
+
+    try:
+        captured_data = bytes.fromhex(input("Enter captured encrypted data (hex): "))
+        wrong_key = input("Enter a key to decrypt the captured data: ").encode()
+
+        if wrong_key:
+            decrypted_data = encrypt(captured_data, wrong_key)
+            print("Decrypted Data:", decrypted_data.decode(errors="replace"))
+    except ValueError:
+        print("Invalid hexadecimal data.")
