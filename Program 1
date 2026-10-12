@@ -1,0 +1,12 @@
+scenario = input("Enter the business scenario: ").lower()
+
+if any(word in scenario for word in ["bank", "banking", "transaction", "credit card", "payment"]):
+    print("Threat Intelligence Application: Banking Fraud Prevention")
+elif any(word in scenario for word in ["hospital", "healthcare", "patient", "medical", "clinic"]):
+    print("Threat Intelligence Application: Healthcare Data Protection")
+elif any(word in scenario for word in ["e-commerce", "ecommerce", "online shopping", "customer orders", "retail"]):
+    print("Threat Intelligence Application: E-commerce Fraud Prevention")
+elif any(word in scenario for word in ["school", "college", "university", "education"]):
+    print("Threat Intelligence Application: Education Data Protection")
+else:
+    print("Threat Intelligence Application: General Cyber Threat Detection")
