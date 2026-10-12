@@ -1,0 +1,41 @@
+from urllib.parse import urlparse
+import ipaddress
+
+url = input("Enter a URL to check: ").strip()
+parsed = urlparse(url if "://" in url else "http://" + url)
+domain = parsed.hostname or ""
+
+keywords = ["login", "verify", "secure", "update", "account", "banking", "password"]
+score = 0
+
+if any(keyword in url.lower() for keyword in keywords):
+    print("Suspicious keywords detected")
+    score += 1
+
+try:
+    ipaddress.ip_address(domain)
+    print("IP-based domain detected")
+    score += 1
+except ValueError:
+    pass
+
+if len(domain.split(".")) > 3:
+    print("Excessive subdomains detected")
+    score += 1
+
+if "@" in url:
+    print("Suspicious '@' symbol detected")
+    score += 1
+
+if parsed.scheme != "https":
+    print("URL does not use HTTPS")
+    score += 1
+
+if score >= 2:
+    print("Result: Potentially Phishing URL")
+elif score == 1:
+    print("Result: Suspicious URL")
+else:
+    print("Result: No common phishing indicators detected")
+
+print("Risk Score:", score)
