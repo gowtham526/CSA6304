@@ -1,0 +1,46 @@
+import re
+from collections import Counter
+
+raw_logs = [
+    "2026-10-12 10:15:20 INFO user=admin action=login status=success",
+    "2026-10-12 10:16:10 ERROR user=john action=login status=failed",
+    "2026-10-12 10:17:30 ERROR user=admin action=access status=failed",
+    "2026-10-12 10:18:45 INFO user=john action=logout status=success"
+]
+
+index = {}
+
+def logstash_parse(log):
+    pattern = r"(\S+ \S+) (\w+) user=(\w+) action=(\w+) status=(\w+)"
+    match = re.match(pattern, log)
+
+    if match:
+        timestamp, level, user, action, status = match.groups()
+        return {
+            "timestamp": timestamp,
+            "level": level,
+            "user": user,
+            "action": action,
+            "status": status
+        }
+
+    return None
+
+for log in raw_logs:
+    event = logstash_parse(log)
+
+    if event:
+        index[event["timestamp"]] = event
+
+print("Elasticsearch-style Index:")
+for event in index.values():
+    print(event)
+
+level_counts = Counter(event["level"] for event in index.values())
+status_counts = Counter(event["status"] for event in index.values())
+user_counts = Counter(event["user"] for event in index.values())
+
+print("\nKibana-style Aggregation:")
+print("Events by Level:", dict(level_counts))
+print("Events by Status:", dict(status_counts))
+print("Events by User:", dict(user_counts))
