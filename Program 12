@@ -1,0 +1,12 @@
+alert = input("Enter SOC alert description: ").lower()
+
+if any(word in alert for word in ["ransomware", "data breach", "active attack"]):
+    priority = "P1"
+elif any(word in alert for word in ["malware", "privilege escalation", "multiple failed logins"]):
+    priority = "P2"
+elif any(word in alert for word in ["suspicious login", "port scan", "unusual activity"]):
+    priority = "P3"
+else:
+    priority = "P4"
+
+print("Alert Priority:", priority)
