@@ -1,0 +1,21 @@
+connections = set()
+
+while True:
+    direction = input("Enter packet direction (outbound/inbound/exit): ").lower()
+
+    if direction == "exit":
+        break
+
+    connection = input("Enter connection ID: ")
+
+    if direction == "outbound":
+        connections.add(connection)
+        print("Outbound Connection Allowed")
+    elif direction == "inbound":
+        if connection in connections:
+            print("Return Traffic Allowed")
+            connections.remove(connection)
+        else:
+            print("Unsolicited Inbound Traffic Blocked")
+    else:
+        print("Invalid Direction")
