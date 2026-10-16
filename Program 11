@@ -1,0 +1,8 @@
+from scapy.all import sniff
+
+def show_packet(packet):
+    print(packet.summary())
+
+interface = input("Enter network interface: ")
+
+sniff(iface=interface, prn=show_packet, count=10, store=False)
