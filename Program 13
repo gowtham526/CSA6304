@@ -1,0 +1,8 @@
+context = input("Enter threat context: ").strip()
+confidence = int(input("Enter confidence level (1-100): "))
+action = input("Enter recommended action: ").strip()
+
+if context and confidence >= 70 and action:
+    print("Valid Threat Intelligence")
+else:
+    print("Unprocessed Raw Data or Insufficient Intelligence")
