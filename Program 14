@@ -1,0 +1,26 @@
+events = [
+    {"source": "Firewall", "ip": "192.168.1.10", "event": "failed_login"},
+    {"source": "Server", "ip": "192.168.1.10", "event": "failed_login"},
+    {"source": "IDS", "ip": "192.168.1.10", "event": "malicious_activity"}
+]
+
+normalized = []
+
+for event in events:
+    normalized.append({
+        "source": event["source"].lower(),
+        "ip": event["ip"],
+        "event": event["event"].lower()
+    })
+
+correlation = {}
+
+for event in normalized:
+    ip = event["ip"]
+    correlation[ip] = correlation.get(ip, 0) + 1
+
+for ip, count in correlation.items():
+    if count >= 3:
+        print("SIEM ALERT: Multiple suspicious events detected from", ip)
+    else:
+        print("Normal Activity:", ip)
