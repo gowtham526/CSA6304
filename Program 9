@@ -1,0 +1,17 @@
+activity = input("Enter intelligence team activity: ").lower()
+
+stages = {
+    "Direction": ["requirement", "planning", "objective"],
+    "Collection": ["gather", "collect", "retrieve"],
+    "Processing": ["clean", "filter", "normalize"],
+    "Analysis": ["analyze", "investigate", "interpret"],
+    "Dissemination": ["share", "report", "distribute"],
+    "Feedback": ["feedback", "review", "improve"]
+}
+
+for stage, keywords in stages.items():
+    if any(word in activity for word in keywords):
+        print("Lifecycle Stage:", stage)
+        break
+else:
+    print("Lifecycle Stage: Unknown")
