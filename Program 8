@@ -1,0 +1,13 @@
+policies = {
+    "Low-Trust": ["Internet"],
+    "Medium-Trust": ["Low-Trust", "Internet"],
+    "Sensitive": ["Medium-Trust"]
+}
+
+source = input("Enter source segment: ")
+target = input("Enter destination segment: ")
+
+if target in policies.get(source, []):
+    print("Access Allowed")
+else:
+    print("Access Denied: Network Segmentation Blocks Lateral Movement")
