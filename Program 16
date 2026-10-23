@@ -1,0 +1,23 @@
+attack = input("Enter attack type: ").lower()
+
+layers = {
+    "Firewall": ["port scan", "unauthorized connection"],
+    "Antivirus": ["malware", "trojan", "ransomware"],
+    "IDS": ["port scan", "suspicious traffic", "unauthorized connection"],
+    "Access Control": ["unauthorized access", "privilege escalation"]
+}
+
+blocked = False
+
+for layer, threats in layers.items():
+    if attack in threats:
+        print(layer, "blocked the attack")
+        blocked = True
+        break
+    else:
+        print(layer, "did not detect the attack")
+
+if blocked:
+    print("Result: System Protected")
+else:
+    print("Result: Attack Passed Through All Security Layers")
