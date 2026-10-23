@@ -1,0 +1,19 @@
+narrative = input("Enter incident case study: ").lower()
+
+categories = {
+    "Phishing": ["phishing", "malicious email", "fake link", "credential theft"],
+    "Unpatched Vulnerability": ["unpatched", "outdated software", "security patch", "known vulnerability"],
+    "Misconfiguration": ["misconfiguration", "default password", "open port", "incorrect permissions"],
+    "Insider Threat": ["insider", "employee leaked", "unauthorized employee", "data theft by employee"],
+    "Supply-Chain Compromise": ["third-party", "vendor", "compromised software", "supply chain"]
+}
+
+scores = {}
+
+for category, keywords in categories.items():
+    scores[category] = sum(keyword in narrative for keyword in keywords)
+
+if max(scores.values()) == 0:
+    print("Root Cause: Unknown")
+else:
+    print("Root Cause:", max(scores, key=scores.get))
