@@ -1,0 +1,26 @@
+logs = [
+    "john failed",
+    "john failed",
+    "john failed",
+    "john success"
+]
+
+user = input("Enter username: ")
+
+failed = 0
+detected = False
+
+for log in logs:
+    name, status = log.split()
+
+    if name == user:
+        if status == "failed":
+            failed += 1
+        elif status == "success" and failed >= 3:
+            detected = True
+            break
+
+if detected:
+    print("Brute Force Attack Detected!")
+else:
+    print("No Brute Force Pattern Detected")
