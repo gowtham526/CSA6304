@@ -1,0 +1,21 @@
+report = input("Enter post-incident report: ").lower()
+
+improvements = {
+    "Patch Management": ["patch", "update", "outdated software"],
+    "Security Awareness": ["training", "awareness", "phishing education"],
+    "Monitoring": ["monitoring", "logging", "siem", "alerts"],
+    "Backup Strategy": ["backup", "recovery", "restore"],
+    "Access Control": ["permissions", "access control", "authentication"]
+}
+
+print("\nIdentified Improvement Areas:")
+
+found = False
+
+for area, keywords in improvements.items():
+    if any(word in report for word in keywords):
+        print(area)
+        found = True
+
+if not found:
+    print("No improvement areas identified")
