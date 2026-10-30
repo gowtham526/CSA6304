@@ -1,0 +1,17 @@
+signatures = ["malware", "sql injection", "port scan"]
+
+whitelist = ["192.168.1.10"]
+
+traffic = [
+    {"ip": "192.168.1.10", "data": "port scan"},
+    {"ip": "192.168.1.20", "data": "malware"},
+    {"ip": "192.168.1.30", "data": "normal traffic"}
+]
+
+for packet in traffic:
+    if packet["ip"] in whitelist:
+        print(packet["ip"], "Trusted - Allowed")
+    elif any(signature in packet["data"].lower() for signature in signatures):
+        print(packet["ip"], "Malicious Traffic - BLOCKED")
+    else:
+        print(packet["ip"], "Traffic Allowed")
