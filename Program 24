@@ -1,0 +1,25 @@
+baseline = {
+    "Firewall": 1,
+    "Antivirus": 1,
+    "Password Length": 12,
+    "MFA": 1,
+    "Backup": 1
+}
+
+current = {
+    "Firewall": 1,
+    "Antivirus": 0,
+    "Password Length": 8,
+    "MFA": 0,
+    "Backup": 1
+}
+
+print("Security Control Assessment:\n")
+
+for control, required in baseline.items():
+    actual = current.get(control, 0)
+
+    if actual >= required:
+        print(control, "- PASS")
+    else:
+        print(control, "- FAIL")
