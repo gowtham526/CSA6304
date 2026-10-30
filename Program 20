@@ -1,0 +1,15 @@
+description = input("Enter incident description: ").lower()
+
+threats = {
+    "Phishing": ["fake email", "phishing", "malicious link", "credential theft"],
+    "DoS/DDoS": ["dos", "ddos", "traffic flood", "server overload"],
+    "Malware": ["virus", "trojan", "ransomware", "malware"],
+    "Man-in-the-Middle": ["mitm", "intercept", "packet sniffing", "communication interception"]
+}
+
+for threat, keywords in threats.items():
+    if any(word in description for word in keywords):
+        print("Network Threat Category:", threat)
+        break
+else:
+    print("Threat Category: Unknown")
