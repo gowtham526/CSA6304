@@ -1,0 +1,15 @@
+description = input("Enter security control description: ").lower()
+
+domains = {
+    "Organizational Controls": ["policy", "risk management", "governance", "compliance"],
+    "People Controls": ["employee", "training", "awareness", "background check"],
+    "Physical Controls": ["cctv", "physical access", "security guard", "biometric"],
+    "Technological Controls": ["firewall", "encryption", "antivirus", "access control", "authentication"]
+}
+
+for domain, keywords in domains.items():
+    if any(word in description for word in keywords):
+        print("ISO 27001 Control Domain:", domain)
+        break
+else:
+    print("Control Domain: Unknown")
