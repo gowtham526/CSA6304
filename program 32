@@ -1,0 +1,20 @@
+properties = [
+    ("Encryption", "Confidentiality", True),
+    ("Data Integrity Check", "Integrity", False),
+    ("System Availability", "Availability", True),
+    ("Access Control", "Confidentiality", False),
+    ("Backup System", "Availability", True)
+]
+
+violations = []
+
+for name, principle, status in properties:
+    if not status:
+        violations.append(principle)
+
+if violations:
+    print("CIA Principles Violated:")
+    for principle in set(violations):
+        print(principle)
+else:
+    print("All CIA Principles are Maintained")
