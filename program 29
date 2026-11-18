@@ -1,0 +1,25 @@
+incident = input("Enter security incident: ").lower()
+
+strategies = {
+    "Phishing": ["phishing", "malicious email"],
+    "Malware": ["malware", "ransomware", "virus"],
+    "Data Breach": ["data breach", "data leak", "data theft"],
+    "DDoS": ["ddos", "dos", "traffic flood"],
+    "Insider Threat": ["insider", "employee misuse"]
+}
+
+actions = {
+    "Phishing": "Block sender and reset affected credentials",
+    "Malware": "Isolate infected systems",
+    "Data Breach": "Restrict access and secure exposed data",
+    "DDoS": "Apply traffic filtering and rate limiting",
+    "Insider Threat": "Suspend suspicious access and investigate"
+}
+
+for category, keywords in strategies.items():
+    if any(word in incident for word in keywords):
+        print("Incident:", category)
+        print("Containment Strategy:", actions[category])
+        break
+else:
+    print("Unknown Incident - Manual Investigation Required")
