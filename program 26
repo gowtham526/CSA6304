@@ -1,0 +1,31 @@
+import hashlib
+
+filename = input("Enter malware sample file: ")
+
+try:
+    with open(filename, "rb") as file:
+        data = file.read()
+
+    print("SHA-256:", hashlib.sha256(data).hexdigest())
+
+    suspicious = ["CreateProcess", "VirtualAlloc", "WriteProcessMemory", "InternetOpen"]
+
+    print("\nStatic Analysis:")
+    for api in suspicious:
+        if api.encode() in data:
+            print("Suspicious API Found:", api)
+
+    behavior = [
+        "File created",
+        "Registry modified",
+        "Network connection established",
+        "Process injected"
+    ]
+
+    print("\nDynamic Analysis:")
+    for event in behavior:
+        if any(word in event.lower() for word in ["registry", "injected", "network"]):
+            print("Suspicious Behavior:", event)
+
+except FileNotFoundError:
+    print("File Not Found")
