@@ -1,0 +1,16 @@
+rules = [
+    {"port": 80, "action": "ALLOW"},
+    {"port": 443, "action": "ALLOW"},
+    {"port": 22, "action": "DENY"}
+]
+
+port = int(input("Enter destination port: "))
+
+result = "DENY"
+
+for rule in rules:
+    if rule["port"] == port:
+        result = rule["action"]
+        break
+
+print("Firewall Decision:", result)
