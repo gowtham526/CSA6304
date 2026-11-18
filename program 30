@@ -1,0 +1,13 @@
+firewall = ["192.168.1.10"]
+windows = ["john failed", "john failed", "john success"]
+vpn = ["john connected"]
+
+failed = sum(1 for log in windows if "failed" in log)
+success = any("success" in log for log in windows)
+vpn_access = any("john connected" in log for log in vpn)
+firewall_activity = "192.168.1.10" in firewall
+
+if failed >= 2 and success and vpn_access and firewall_activity:
+    print("SIEM ALERT: Possible Brute Force Attack Detected")
+else:
+    print("No Suspicious Activity Detected")
