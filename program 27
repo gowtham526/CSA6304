@@ -1,0 +1,26 @@
+signatures = [
+    {"protocol": "TCP", "port": 80, "pattern": "sql injection"},
+    {"protocol": "TCP", "port": 443, "pattern": "malware"},
+    {"protocol": "UDP", "port": 53, "pattern": "dns attack"}
+]
+
+packets = [
+    {"protocol": "TCP", "port": 80, "data": "sql injection detected"},
+    {"protocol": "UDP", "port": 53, "data": "normal traffic"},
+    {"protocol": "TCP", "port": 443, "data": "malware detected"}
+]
+
+for packet in packets:
+    detected = False
+
+    for rule in signatures:
+        if (packet["protocol"] == rule["protocol"] and
+            packet["port"] == rule["port"] and
+            rule["pattern"] in packet["data"].lower()):
+
+            print("IDS ALERT:", packet)
+            detected = True
+            break
+
+    if not detected:
+        print("Normal Traffic:", packet)
