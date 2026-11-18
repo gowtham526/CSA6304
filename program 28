@@ -1,0 +1,20 @@
+from collections import Counter
+
+logs = [
+    "192.168.1.10",
+    "192.168.1.20",
+    "192.168.1.10",
+    "192.168.1.10",
+    "192.168.1.10",
+    "192.168.1.30",
+    "192.168.1.10"
+]
+
+limit = 3
+counts = Counter(logs)
+
+for ip, count in counts.items():
+    if count > limit:
+        print(ip, "- Possible DoS Attack Detected")
+    else:
+        print(ip, "- Normal Traffic")
