@@ -1,0 +1,26 @@
+import hashlib
+import json
+
+records = [
+    {"evidence": "File1", "timestamp": 100, "previous_hash": "0"},
+    {"evidence": "File2", "timestamp": 110, "previous_hash": ""},
+    {"evidence": "File3", "timestamp": 120, "previous_hash": ""}
+]
+
+previous_hash = "0"
+previous_time = 0
+
+for record in records:
+    data = record["evidence"] + str(record["timestamp"]) + previous_hash
+    current_hash = hashlib.sha256(data.encode()).hexdigest()
+
+    if record["timestamp"] < previous_time or record["previous_hash"] != previous_hash:
+        print("Chain Broken")
+        break
+
+    record["previous_hash"] = previous_hash
+    previous_hash = current_hash
+    previous_time = record["timestamp"]
+
+else:
+    print("Chain of Custody Verified")
