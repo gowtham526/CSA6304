@@ -1,0 +1,15 @@
+description = input("Enter system or data description: ").lower()
+
+standards = {
+    "PCI-DSS": ["credit card", "payment card", "cardholder", "card payment"],
+    "HIPAA": ["patient", "healthcare", "medical records", "hospital"],
+    "GDPR": ["personal data", "eu citizens", "privacy", "customer data"],
+    "SOX": ["financial reporting", "accounting", "financial statements", "audit"]
+}
+
+for standard, keywords in standards.items():
+    if any(word in description for word in keywords):
+        print("Applicable Standard:", standard)
+        break
+else:
+    print("No Matching Standard Found")
