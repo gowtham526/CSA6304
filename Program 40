@@ -1,0 +1,23 @@
+task = input("Describe your security task: ").lower()
+
+tools = {
+    "Nmap": ["port scanning", "network discovery", "open ports"],
+    "Wireshark": ["packet analysis", "network traffic", "sniffing"],
+    "Splunk": ["log analysis", "siem", "event monitoring"],
+    "Nessus": ["vulnerability scanning", "security assessment"],
+    "Metasploit": ["penetration testing", "exploit testing"],
+    "Burp Suite": ["web application", "web security", "http testing"],
+    "Wazuh": ["host monitoring", "intrusion detection", "file integrity"]
+}
+
+scores = {}
+
+for tool, keywords in tools.items():
+    scores[tool] = sum(word in task for word in keywords)
+
+best_tool = max(scores, key=scores.get)
+
+if scores[best_tool] > 0:
+    print("Recommended Security Tool:", best_tool)
+else:
+    print("No Matching Tool Found")
