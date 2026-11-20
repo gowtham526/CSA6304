@@ -1,0 +1,20 @@
+roles = {
+    "Admin": ["read", "write", "delete", "manage"],
+    "Analyst": ["read", "write"],
+    "Guest": ["read"]
+}
+
+users = {
+    "John": {"role": "Analyst", "permissions": ["read", "write", "delete"]},
+    "David": {"role": "Guest", "permissions": ["read"]},
+    "Mike": {"role": "Analyst", "permissions": ["read", "write"]}
+}
+
+for user, details in users.items():
+    required = roles[details["role"]]
+    excess = set(details["permissions"]) - set(required)
+
+    if excess:
+        print(user, "Excess Access:", excess)
+    else:
+        print(user, "Access Compliant")
