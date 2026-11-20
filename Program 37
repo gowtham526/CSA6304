@@ -1,0 +1,29 @@
+import time
+
+baseline = {
+    "john": 2,
+    "admin": 3
+}
+
+events = [
+    ("john", "success"),
+    ("admin", "success"),
+    ("john", "failed"),
+    ("john", "failed"),
+    ("john", "failed"),
+    ("admin", "failed")
+]
+
+counts = {}
+
+print("Monitoring Login Events...\n")
+
+for user, status in events:
+    counts[user] = counts.get(user, 0) + 1
+
+    print("User:", user, "Status:", status)
+
+    if status == "failed" and counts[user] > baseline.get(user, 0):
+        print("ALERT: Suspicious Login Activity Detected!")
+
+    time.sleep(1)
