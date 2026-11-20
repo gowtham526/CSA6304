@@ -1,0 +1,17 @@
+action = input("Enter incident response action: ").lower()
+
+phases = {
+    "Preparation": ["training", "planning", "backup", "prepare"],
+    "Identification": ["detect", "identify", "investigate", "alert"],
+    "Containment": ["isolate", "block", "disconnect", "restrict"],
+    "Eradication": ["remove", "delete malware", "patch", "eliminate"],
+    "Recovery": ["restore", "recover", "restart", "resume"],
+    "Lessons Learned": ["review", "document", "improve", "lessons"]
+}
+
+for phase, keywords in phases.items():
+    if any(word in action for word in keywords):
+        print("Incident Response Phase:", phase)
+        break
+else:
+    print("Unknown Phase")
