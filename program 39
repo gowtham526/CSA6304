@@ -1,0 +1,21 @@
+ioc_feed = [
+    "192.168.1.10",
+    "malicious.com",
+    "abc123malware"
+]
+
+internal_logs = [
+    "User connected to 192.168.1.10",
+    "User visited google.com",
+    "File hash abc123malware detected"
+]
+
+normalized_iocs = [ioc.lower().strip() for ioc in ioc_feed]
+
+print("Threat Intelligence Alerts:\n")
+
+for log in internal_logs:
+    for ioc in normalized_iocs:
+        if ioc in log.lower():
+            print("ALERT: IOC Match Found:", ioc)
+            print("Log:", log)
