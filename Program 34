@@ -1,0 +1,28 @@
+logs = [
+    "192.168.1.10 failed login",
+    "192.168.1.20 normal login",
+    "192.168.1.10 suspicious activity",
+    "192.168.1.30 normal login",
+    "192.168.1.10 malware detected"
+]
+
+print("1. Hypothesis-Based Hunting")
+for log in logs:
+    if "failed login" in log:
+        print("Suspicious:", log)
+
+print("\n2. Intelligence-Based Hunting")
+known_ip = "192.168.1.10"
+
+for log in logs:
+    if known_ip in log:
+        print("Threat Match:", log)
+
+print("\n3. Analytics-Based Hunting")
+from collections import Counter
+
+counts = Counter(log.split()[0] for log in logs)
+
+for ip, count in counts.items():
+    if count >= 3:
+        print("Anomaly Detected:", ip)
